@@ -1,0 +1,10 @@
+/* CSS declarations go here */
+svg.gameCanvas {
+	height: 100vh;
+	width: 100vw;
+	background: #eee;
+}
+
+body {
+	margin: 0;
+}

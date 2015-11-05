@@ -1,0 +1,26 @@
+<head>
+  <title>agar</title>
+</head>
+
+<body>
+	{{#if me.gameOver}}
+		<h1>Game over</h1>
+	{{/if}}
+	<svg class=gameCanvas viewBox="-160 -160 320 320" >
+		{{#unless me.gameOver}}
+		<g transform="translate({{invert me.x}}, {{invert me.y}})">
+			{{#each otherPlayers}}
+				{{> cirlce}}
+			{{/each}}	
+			{{#each points}}
+				{{> cirlce}}
+			{{/each}}		
+		</g>
+		{{> cirlce x=0 y=0 colored=true radius=me.radius color="black"}}
+		{{/unless}}
+	</svg>
+</body>
+
+<template name="cirlce">
+	<circle cx="{{x}}" cy="{{y}}" r="{{radius}}" fill="{{color}}"/>
+</template>
