@@ -22,11 +22,6 @@ Template.body.helpers({
 	invert(number) { return -number }
 })
 
-function setCenter(svg) {
-	screenWidth.set(center.x = svg.width.baseVal.value/2)
-	screenHeight.set(center.y = svg.height.baseVal.value/2)
-}
-
 function changeDirection(pushInfo) {
 	const d = {
 		x: pushInfo.offsetX - center.x,
@@ -42,6 +37,11 @@ Template.body.onRendered(function() {
 	setCenter(svg)
 	window.onresize = function() {setCenter(svg)}
 })
+
+function setCenter(svg) {
+	screenWidth.set(center.x = svg.width.baseVal.value/2)
+	screenHeight.set(center.y = svg.height.baseVal.value/2)
+}
 
 Template.body.events({
 	'mousemove svg'(event) {changeDirection(event)},

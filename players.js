@@ -1,4 +1,3 @@
-playerConnections = new Map()
 Players = new Mongo.Collection('players', {
 	transform(player) {
 		player.radius = 10+player.points;
