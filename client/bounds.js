@@ -1,3 +1,5 @@
+// Teleport player when he reaches the bounds
+
 Meteor.startup(function() {
 	Tracker.autorun(function() {
 		const _id = myId.get()
