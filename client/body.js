@@ -1,6 +1,6 @@
 myId = new ReactiveVar()
-const center = {x: 100, y: 100}
-const direction = [0,0]
+var center = {x: 100, y: 100}
+var direction = [0,0]
 var velocity = 1.5
 screenWidth = new ReactiveVar(100)
 screenHeight = new ReactiveVar(100)
