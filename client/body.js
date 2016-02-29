@@ -2,8 +2,6 @@ myId = new ReactiveVar()
 var center = {x: 100, y: 100}
 var direction = [0,0]
 var velocity = 1.5
-screenWidth = new ReactiveVar(100)
-screenHeight = new ReactiveVar(100)
 
 window.requestAnimationFrame(function updateMyPosition() {
 	Players.update(myId.get(), {$inc: {
@@ -32,17 +30,6 @@ function changeDirection(pushInfo) {
 	direction[1] = d.y/length
 }
 
-Template.body.onRendered(function() {
-	var svg = this.find('svg')
-	setCenter(svg)
-	window.onresize = function() {setCenter(svg)}
-})
-
-function setCenter(svg) {
-	screenWidth.set(center.x = svg.width.baseVal.value/2)
-	screenHeight.set(center.y = svg.height.baseVal.value/2)
-}
-
 Template.body.events({
 	'mousemove svg'(event) {changeDirection(event)},
 	touchmove(e, t) {
@@ -55,9 +42,7 @@ Template.body.events({
 
 Tracker.autorun(function() {
 	if (Meteor.status().connected == true)
-		Meteor.call('myId', function(err, result) {
-			myId.set(result)
-		})
+		Meteor.call('myId', (err, result)=>myId.set(result) )
 })
 
 Meteor.startup(function() {
@@ -91,5 +76,19 @@ Meteor.startup(function() {
 		}
 	})	
 })
+
+screenWidth = new ReactiveVar(100)
+screenHeight = new ReactiveVar(100)
+
+Template.body.onRendered(function() {
+	var svg = this.find('svg')
+	setCenter(svg)
+	window.onresize = function() {setCenter(svg)}
+})
+
+function setCenter(svg) {
+	screenWidth.set(center.x = svg.width.baseVal.value/2)
+	screenHeight.set(center.y = svg.height.baseVal.value/2)
+}
 
 document.ontouchstart = function(e){ e.preventDefault() }
